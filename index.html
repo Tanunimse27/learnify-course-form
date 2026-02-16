@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buy Course - Learnify Hub</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f6ff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 40px auto;
+      background: white;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #3b3b7a;
+      margin-bottom: 5px;
+    }
+
+    p {
+      text-align: center;
+      color: gray;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: none;
+      height: 90px;
+    }
+
+    .row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .row div {
+      flex: 1;
+    }
+
+    .checkbox {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    .checkbox input {
+      width: auto;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #4b4bd8;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #3a3ab3;
+    }
+
+    .success {
+      margin-top: 15px;
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Buy a Course</h1>
+    <p>Fill the details below to enroll in your course.</p>
+
+    <form id="courseForm">
+
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Enter your full name" required />
+
+      <div class="row">
+        <div>
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email" required />
+        </div>
+        <div>
+          <label>Phone Number</label>
+          <input type="tel" id="phone" placeholder="Enter your mobile number" required />
+        </div>
+      </div>
+
+      <label>Select Category</label>
+      <select id="category" required>
+        <option value="">-- Choose Category --</option>
+        <option value="science">Science & Technology</option>
+        <option value="growth">Growth & Development</option>
+        <option value="music">Music</option>
+        <option value="lifestyle">Lifestyle</option>
+        <option value="health">Health & Finance</option>
+        <option value="art">Art & Design</option>
+      </select>
+
+      <label>Select Course</label>
+      <select id="course" required>
+        <option value="">-- Select a Course --</option>
+      </select>
+
+      <label>Course Price (Auto Filled)</label>
+      <input type="text" id="price" placeholder="Price will appear here" readonly />
+
+      <label>Mode of Learning</label>
+      <select id="mode" required>
+        <option value="">-- Select Mode --</option>
+        <option value="online">Online</option>
+        <option value="offline">Offline (Classroom)</option>
+        <option value="hybrid">Hybrid (Online + Offline)</option>
+      </select>
+
+      <label>Payment Method</label>
+      <select id="payment" required>
+        <option value="">-- Select Payment Method --</option>
+        <option value="upi">UPI</option>
+        <option value="card">Debit/Credit Card</option>
+        <option value="netbanking">Net Banking</option>
+        <option value="cash">Cash Payment</option>
+      </select>
+
+      <label>Transaction ID / Reference No. (Optional)</label>
+      <input type="text" id="transaction" placeholder="Enter transaction ID if paid online" />
+
+      <label>Address (Optional)</label>
+      <textarea id="address" placeholder="Enter your address"></textarea>
+
+      <label>Any Message (Optional)</label>
+      <textarea id="message" placeholder="Write your message or query"></textarea>
+
+      <div class="checkbox">
+        <input type="checkbox" id="terms" required />
+        <label for="terms">I agree to the Terms & Conditions</label>
+      </div>
+
+      <button type="submit">Submit Enrollment</button>
+
+      <div class="success" id="successMsg">
+        ✅ Your enrollment form has been submitted successfully!
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    const courseData = {
+      science: [
+        { name: "Python Programming", price: "₹499" },
+        { name: "Web Development (HTML, CSS, JS)", price: "₹799" },
+        { name: "Data Science Basics", price: "₹999" },
+        { name: "Cyber Security Fundamentals", price: "₹899" },
+        { name: "Artificial Intelligence (AI) Intro", price: "₹1099" }
+      ],
+
+      growth: [
+        { name: "Public Speaking & Confidence", price: "₹599" },
+        { name: "Time Management Mastery", price: "₹399" },
+        { name: "Personality Development", price: "₹699" },
+        { name: "Communication Skills", price: "₹499" }
+      ],
+
+      music: [
+        { name: "Guitar for Beginners", price: "₹799" },
+        { name: "Vocal Training Course", price: "₹699" },
+        { name: "Music Production Basics", price: "₹999" },
+        { name: "Keyboard/Piano Basics", price: "₹899" }
+      ],
+
+      lifestyle: [
+        { name: "Photography & Editing", price: "₹599" },
+        { name: "Cooking & Baking Basics", price: "₹499" },
+        { name: "Travel Planning & Budgeting", price: "₹399" },
+        { name: "Fashion & Styling Tips", price: "₹699" }
+      ],
+
+      health: [
+        { name: "Fitness & Workout Training", price: "₹799" },
+        { name: "Yoga & Meditation", price: "₹499" },
+        { name: "Personal Finance Management", price: "₹899" },
+        { name: "Investment & Stock Market Basics", price: "₹1099" }
+      ],
+
+      art: [
+        { name: "Graphic Design (Canva + Photoshop)", price: "₹899" },
+        { name: "UI/UX Design Basics", price: "₹999" },
+        { name: "Drawing & Sketching Fundamentals", price: "₹499" },
+        { name: "Digital Art & Illustration", price: "₹799" }
+      ]
+    };
+
+    const categorySelect = document.getElementById("category");
+    const courseSelect = document.getElementById("course");
+    const priceInput = document.getElementById("price");
+
+    categorySelect.addEventListener("change", function () {
+      const selectedCategory = this.value;
+      courseSelect.innerHTML = '<option value="">-- Select a Course --</option>';
+      priceInput.value = "";
+
+      if (selectedCategory && courseData[selectedCategory]) {
+        courseData[selectedCategory].forEach(course => {
+          const option = document.createElement("option");
+          option.value = course.name;
+          option.textContent = course.name;
+          option.setAttribute("data-price", course.price);
+          courseSelect.appendChild(option);
+        });
+      }
+    });
+
+    courseSelect.addEventListener("change", function () {
+      const selectedOption = this.options[this.selectedIndex];
+      const price = selectedOption.getAttribute("data-price");
+      priceInput.value = price ? price : "";
+    });
+
+    document.getElementById("courseForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      document.getElementById("successMsg").style.display = "block";
+
+      setTimeout(() => {
+        document.getElementById("successMsg").style.display = "none";
+        this.reset();
+        courseSelect.innerHTML = '<option value="">-- Select a Course --</option>';
+        priceInput.value = "";
+      }, 3000);
+    });
+  </script>
+
+</body>
+</html>
